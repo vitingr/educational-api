@@ -1,0 +1,19 @@
+enum LocaleEnum {
+  pt
+  en
+}
+
+enum ComplementaryMaterialTypeEnum {
+  file
+  video
+  spreadsheet
+  website
+}
+
+model Locale {
+  id        String     @id @default(uuid())
+  name      LocaleEnum
+  createdAt DateTime   @default(now())
+
+  @@map("locales")
+}

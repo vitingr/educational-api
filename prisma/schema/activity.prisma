@@ -1,0 +1,22 @@
+model GeneratedStudyPlan {
+  id        String   @id @default(uuid())
+  userId    String
+  createdAt DateTime @default(now())
+
+  user           User             @relation(fields: [userId], references: [id])
+  FavouritePlans FavouritePlans[]
+
+  @@map("generated_study_plans")
+}
+
+model FavouritePlans {
+  id     String @id @default(uuid())
+  userId String
+  planId String
+
+  user User               @relation(fields: [userId], references: [id])
+  plan GeneratedStudyPlan @relation(fields: [planId], references: [id])
+
+  @@unique([userId, planId])
+  @@map("saved_plans")
+}
