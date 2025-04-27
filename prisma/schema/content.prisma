@@ -12,8 +12,9 @@ enum ComplementaryMaterialTypeEnum {
 
 model Locale {
   id        String     @id @default(uuid())
-  name      LocaleEnum
   createdAt DateTime   @default(now())
+
+  name      LocaleEnum
 
   @@map("locales")
 }

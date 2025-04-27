@@ -3,31 +3,40 @@ enum UserRoleEnum {
   student
 }
 
+enum StudyTimeEnum {
+  morning
+  evening
+  afternoon
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile  Profile?
-  authCode AuthCode[]
+  profile            Profile?
+  authCode           AuthCode[]
+  GeneratedStudyPlan GeneratedStudyPlan[]
+  FavouritePlans     FavouritePlans[]
 
   @@map("users")
-  GeneratedStudyPlan GeneratedStudyPlan[]
-  FavouritePlans FavouritePlans[]
 }
 
 model Profile {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  name      String?
-  phone     String?
-  avatarUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                   String         @id @default(uuid())
+  userId               String         @unique
+  name                 String?
+  phone                String?
+  avatarUrl            String?
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  availableHoursPerDay Int            @default(1)
+  preferences          String?
+  favouriteStudyTime   StudyTimeEnum?
+  role                 UserRoleEnum?
 
-  user User          @relation(fields: [userId], references: [id])
-  role UserRoleEnum?
+  user User @relation(fields: [userId], references: [id])
 
   @@map("profiles")
 }
