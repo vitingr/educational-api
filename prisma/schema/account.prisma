@@ -15,10 +15,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile            Profile?
-  authCode           AuthCode[]
-  GeneratedStudyPlan GeneratedStudyPlan[]
-  FavouritePlans     FavouritePlans[]
+  profile          Profile?
+  authCode         AuthCode[]
+  DailyStudyPlans  DailyStudyPlan[]
+  WeeklyStudyPlans WeeklyStudyPlans[]
+  FavouritePlans   FavouritePlans[]
 
   @@map("users")
 }

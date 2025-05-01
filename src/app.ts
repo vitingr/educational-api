@@ -6,6 +6,8 @@ import fastifyCookie from '@fastify/cookie'
 import fastifyCors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import { env } from './shared/config/env'
+import { accountRoutes } from './modules/account/http/route'
+import { activitiesRoutes } from './modules/activity/http/routes'
 
 export const app = fastify({
   logger: {
@@ -38,9 +40,13 @@ app.register(fastifyJwt, {
     expiresIn: '7d'
   }
 })
+
 app.register(fastifyCookie, {
   secret: env.JWT_SECRET
 })
+
+app.register(accountRoutes)
+app.register(activitiesRoutes)
 
 app.get('/', (_, reply) => {
   return reply.send({

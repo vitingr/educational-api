@@ -9,7 +9,7 @@ export class GetUserByEmailController extends BaseController {
   private useCase = getUserByEmailFactory()
 
   constructor() {
-    super({ method: 'get', path: '/users/email/:email' })
+    super({ method: 'get', path: '/users/email/:email', isPublicRoute: true })
   }
 
   protected async execute(request: FastifyRequest, reply: FastifyReply) {
