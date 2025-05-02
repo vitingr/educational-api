@@ -1,15 +1,15 @@
 import { BaseController } from '@/shared/infra/http/controllers/base-controler'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { getDailyStudyPlansParamsSchema } from './schemas'
+import { getWeeklyPlansParamsSchema } from './schemas'
 import { getDailyStudyPlansFactory } from '@/modules/activity/use-cases/daily-study-plans/get-daily-study-plans/factory'
 
-export class GetDailyStudyPlansController extends BaseController {
+export class GetWeeklyPlansController extends BaseController {
   private useCase = getDailyStudyPlansFactory()
 
   constructor() {
     super({
       method: 'get',
-      path: '/daily-study-plans/:weeklyPlanId'
+      path: '/weekly-study-plans/:userId'
     })
   }
 
@@ -17,12 +17,12 @@ export class GetDailyStudyPlansController extends BaseController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<void> {
-    const payload = getDailyStudyPlansParamsSchema.parse(request.params)
+    const payload = getWeeklyPlansParamsSchema.parse(request.params)
 
-    const response = await this.useCase.execute(payload.weeklyPlanId)
+    const response = await this.useCase.execute(payload.userId)
 
     reply.status(200).send(response)
   }
 }
 
-export const getDailyStudyPlansController = new GetDailyStudyPlansController()
+export const getWeeklyPlansController = new GetWeeklyPlansController()

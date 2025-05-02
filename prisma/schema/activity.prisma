@@ -7,13 +7,13 @@ model DailyStudyPlan {
   weeklyPlanId String?
   isCompleted  Boolean  @default(false)
 
-  user       User              @relation(fields: [userId], references: [id])
-  weeklyPlan WeeklyStudyPlans? @relation(fields: [weeklyPlanId], references: [id])
+  user       User             @relation(fields: [userId], references: [id])
+  weeklyPlan WeeklyStudyPlan? @relation(fields: [weeklyPlanId], references: [id])
 
   @@map("daily_study_plans")
 }
 
-model WeeklyStudyPlans {
+model WeeklyStudyPlan {
   id          String   @id @default(uuid())
   userId      String
   title       String
@@ -32,8 +32,8 @@ model FavouritePlans {
   userId String
   planId String
 
-  user             User              @relation(fields: [userId], references: [id])
-  WeeklyStudyPlans WeeklyStudyPlans? @relation(fields: [planId], references: [id])
+  user             User             @relation(fields: [userId], references: [id])
+  WeeklyStudyPlans WeeklyStudyPlan? @relation(fields: [planId], references: [id])
 
   @@unique([userId, planId])
   @@map("saved_plans")
