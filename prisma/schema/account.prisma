@@ -19,7 +19,7 @@ model User {
   authCode         AuthCode[]
   DailyStudyPlans  DailyStudyPlan[]
   WeeklyStudyPlans WeeklyStudyPlan[]
-  FavouritePlans   FavouritePlans[]
+  FavouritePlans   FavouritePlan[]
 
   @@map("users")
 }

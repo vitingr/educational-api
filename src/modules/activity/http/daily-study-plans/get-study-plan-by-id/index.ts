@@ -17,9 +17,9 @@ export class GetDailyStudyPlanByIdController extends BaseController {
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<void> {
-    const payload = getDailyStudyPlanByIdParamsSchema.parse(request.params)
+    const { id } = getDailyStudyPlanByIdParamsSchema.parse(request.params)
 
-    const response = await this.useCase.execute(payload.id)
+    const response = await this.useCase.execute(id)
 
     reply.status(200).send(response)
   }

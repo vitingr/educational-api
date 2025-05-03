@@ -21,13 +21,13 @@ model WeeklyStudyPlan {
   isCompleted Boolean
 
   user           User             @relation(fields: [userId], references: [id])
-  FavouritePlans FavouritePlans[]
+  FavouritePlans FavouritePlan[]
   DailyStudyPlan DailyStudyPlan[]
 
   @@map("weekly_study_plans")
 }
 
-model FavouritePlans {
+model FavouritePlan {
   id     String @id @default(uuid())
   userId String
   planId String
