@@ -18,7 +18,7 @@ export class CreateDailyStudyPlanController extends BaseController {
 
     const response = await this.useCase.execute(payload)
 
-    reply.status(200).send(response)
+    reply.status(201).send(response)
   }
 }
 

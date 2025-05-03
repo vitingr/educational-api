@@ -21,7 +21,7 @@ export class CreateWeeklyPlanController extends BaseController {
       isCompleted: false,
     })
 
-    reply.status(200).send(response)
+    reply.status(201).send(response)
   }
 }
 

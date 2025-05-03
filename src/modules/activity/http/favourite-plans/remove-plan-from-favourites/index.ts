@@ -1,6 +1,6 @@
 import { BaseController } from '@/shared/infra/http/controllers/base-controler'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { removePlanFromFavouritesBodySchema } from './schemas'
+import { removePlanFromFavouritesParamsSchema } from './schemas'
 import { removePlanFromFavouritesFactory } from '@/modules/activity/use-cases/favourite-plans/remove-plan-from-favourites/factory'
 
 export class RemovePlanFromFavouritesController extends BaseController {
@@ -8,13 +8,13 @@ export class RemovePlanFromFavouritesController extends BaseController {
 
   constructor() {
     super({
-      method: 'post',
-      path: '/favourites/remove'
+      method: 'delete',
+      path: '/favourites/:id'
     })
   }
 
   protected async execute(request: FastifyRequest, reply: FastifyReply) {
-    const { id } = removePlanFromFavouritesBodySchema.parse(request.body)
+    const { id } = removePlanFromFavouritesParamsSchema.parse(request.params)
 
     const response = await this.useCase.execute(id)
 

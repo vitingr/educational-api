@@ -9,7 +9,7 @@ export class GetFavouritePlansController extends BaseController {
   constructor() {
     super({
       method: 'post',
-      path: '/favourites/:id'
+      path: '/favourites/:userId'
     })
   }
 
@@ -18,7 +18,7 @@ export class GetFavouritePlansController extends BaseController {
 
     const response = await this.useCase.execute(userId)
 
-    reply.status(200).send(response)
+    reply.status(204).send(response)
   }
 }
 

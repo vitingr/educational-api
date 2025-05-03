@@ -2,7 +2,6 @@ model DailyStudyPlan {
   id           String   @id @default(uuid())
   userId       String
   createdAt    DateTime @default(now())
-  startTime    DateTime
   content      String
   weeklyPlanId String?
   isCompleted  Boolean  @default(false)
@@ -20,9 +19,9 @@ model WeeklyStudyPlan {
   createdAt   DateTime @default(now())
   isCompleted Boolean
 
-  user           User             @relation(fields: [userId], references: [id])
-  FavouritePlans FavouritePlan[]
-  DailyStudyPlan DailyStudyPlan[]
+  user            User             @relation(fields: [userId], references: [id])
+  favouritePlans  FavouritePlan[]
+  dailyStudyPlans DailyStudyPlan[]
 
   @@map("weekly_study_plans")
 }
@@ -33,7 +32,7 @@ model FavouritePlan {
   planId String
 
   user             User             @relation(fields: [userId], references: [id])
-  WeeklyStudyPlans WeeklyStudyPlan? @relation(fields: [planId], references: [id])
+  weeklyStudyPlans WeeklyStudyPlan? @relation(fields: [planId], references: [id])
 
   @@unique([userId, planId])
   @@map("saved_plans")

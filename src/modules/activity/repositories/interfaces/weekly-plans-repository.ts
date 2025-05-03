@@ -2,7 +2,8 @@ import { WeeklyStudyPlan, Prisma } from "@prisma/client";
 
 export type GetWeeklyPlansReturn = Prisma.WeeklyStudyPlanGetPayload<{
   include: {
-    user: true
+    user: true,
+    DailyStudyPlan: true
   }
 }>
 
