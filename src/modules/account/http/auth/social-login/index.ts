@@ -13,8 +13,6 @@ export class SocialLoginController extends AuthController {
   protected async execute(request: FastifyRequest, reply: FastifyReply) {
     const payload = socialLoginBodySchema.parse(request.body)
 
-    console.log(`recebeu: $${JSON.stringify(payload)}`)
-
     const response = await this.useCase.execute(payload)
 
     const {

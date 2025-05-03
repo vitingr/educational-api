@@ -1,7 +1,5 @@
 import { AuthRepository } from '@/modules/account/repositories/interfaces/auth-repository'
-import {
-  UsersRepository
-} from '@/modules/account/repositories/interfaces/users-repository'
+import { UsersRepository } from '@/modules/account/repositories/interfaces/users-repository'
 import { ProfileDoesNotExistError } from '@/shared/infra/http/exceptions/profile'
 
 import { Profile } from '@prisma/client'
@@ -50,9 +48,7 @@ export abstract class BaseAuthUseCase {
   }
 
   // review here
-  protected async getOrCreateUser(
-    email: string
-  ) {
+  protected async getOrCreateUser(email: string) {
     let user = await this.usersRepository.getUserByEmail(email)
 
     if (!user) {

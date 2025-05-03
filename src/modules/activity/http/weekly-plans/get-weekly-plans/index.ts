@@ -1,10 +1,10 @@
 import { BaseController } from '@/shared/infra/http/controllers/base-controler'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { getWeeklyPlansParamsSchema } from './schemas'
-import { getDailyStudyPlansFactory } from '@/modules/activity/use-cases/daily-study-plans/get-daily-study-plans/factory'
+import { getWeeklyPlansFactory } from '@/modules/activity/use-cases/weekly-plans/get-weekly-plans/factory'
 
 export class GetWeeklyPlansController extends BaseController {
-  private useCase = getDailyStudyPlansFactory()
+  private useCase = getWeeklyPlansFactory()
 
   constructor() {
     super({
