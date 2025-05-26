@@ -53,6 +53,38 @@ export class PrismaWeeklyPlansRepository implements WeeklyPlansRepository {
   getWeeklyPlans = async (userId: string) => {
     const weeklyStudyPlans = await prisma.weeklyStudyPlan.findMany({
       where: {
+        userId
+      }
+    })
+
+    const plansWithCompletion = await Promise.all(
+      weeklyStudyPlans.map(async weeklyPlan => {
+        const dailyStudyPlans = await prisma.dailyStudyPlan.findMany({
+          where: {
+            weeklyPlanId: weeklyPlan.id
+          }
+        })
+
+        const total = dailyStudyPlans.length
+        const completed = dailyStudyPlans.filter(
+          plan => plan.isCompleted
+        ).length
+
+        const completionPercentage = total > 0 ? (completed / total) * 100 : 0
+
+        return {
+          ...weeklyPlan,
+          completionPercentage
+        }
+      })
+    )
+
+    return plansWithCompletion
+  }
+
+  getActiveWeeklyPlans = async (userId: string) => {
+    const weeklyStudyPlans = await prisma.weeklyStudyPlan.findMany({
+      where: {
         userId,
         isCompleted: false
       }
