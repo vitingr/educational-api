@@ -8,7 +8,7 @@ export class GetFavouritePlansController extends BaseController {
 
   constructor() {
     super({
-      method: 'post',
+      method: 'get',
       path: '/favourites/:userId'
     })
   }

@@ -57,6 +57,13 @@ export class PrismaWeeklyPlansRepository implements WeeklyPlansRepository {
       }
     })
 
+    const favouritePlans = await prisma.favouritePlan.findMany({
+      where: {
+        userId
+      }
+    })
+    const favouritePlanIds = new Set(favouritePlans.map(fav => fav.planId))
+
     const plansWithCompletion = await Promise.all(
       weeklyStudyPlans.map(async weeklyPlan => {
         const dailyStudyPlans = await prisma.dailyStudyPlan.findMany({
@@ -74,7 +81,8 @@ export class PrismaWeeklyPlansRepository implements WeeklyPlansRepository {
 
         return {
           ...weeklyPlan,
-          completionPercentage
+          completionPercentage,
+          isFavourite: favouritePlanIds.has(weeklyPlan.id)
         }
       })
     )
@@ -90,6 +98,13 @@ export class PrismaWeeklyPlansRepository implements WeeklyPlansRepository {
       }
     })
 
+    const favouritePlans = await prisma.favouritePlan.findMany({
+      where: {
+        userId
+      }
+    })
+    const favouritePlanIds = new Set(favouritePlans.map(fav => fav.planId))
+
     const plansWithCompletion = await Promise.all(
       weeklyStudyPlans.map(async weeklyPlan => {
         const dailyStudyPlans = await prisma.dailyStudyPlan.findMany({
@@ -107,7 +122,8 @@ export class PrismaWeeklyPlansRepository implements WeeklyPlansRepository {
 
         return {
           ...weeklyPlan,
-          completionPercentage
+          completionPercentage,
+          isFavourite: favouritePlanIds.has(weeklyPlan.id)
         }
       })
     )

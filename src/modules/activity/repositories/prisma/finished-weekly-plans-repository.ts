@@ -1,8 +1,10 @@
-import { prisma } from "@/shared/infra/database/prisma/client";
-import { FinishedWeeklyPlansRepository } from "../interfaces/finished-weekly-plans-repository";
-import { WeeklyStudyPlan } from "@prisma/client";
+import { prisma } from '@/shared/infra/database/prisma/client'
+import { FinishedWeeklyPlansRepository } from '../interfaces/finished-weekly-plans-repository'
+import { WeeklyStudyPlan } from '@prisma/client'
 
-export class PrismaFinishedWeeklyPlansRepository implements FinishedWeeklyPlansRepository {
+export class PrismaFinishedWeeklyPlansRepository
+  implements FinishedWeeklyPlansRepository
+{
   finishWeeklyStudyPlan = async (planId: string) => {
     await prisma.weeklyStudyPlan.update({
       where: {

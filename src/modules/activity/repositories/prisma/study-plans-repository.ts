@@ -1,9 +1,13 @@
-import { DailyStudyPlan, Prisma } from "@prisma/client";
-import { DailyStudyPlansRepository } from "../interfaces/study-plans-repository";
-import { prisma } from "@/shared/infra/database/prisma/client";
+import { DailyStudyPlan, Prisma } from '@prisma/client'
+import { DailyStudyPlansRepository } from '../interfaces/study-plans-repository'
+import { prisma } from '@/shared/infra/database/prisma/client'
 
-export class PrismaDailyStudyPlansRepository implements DailyStudyPlansRepository {
-  createDailyStudyPlan = async (payload: Prisma.DailyStudyPlanUncheckedCreateInput) => {
+export class PrismaDailyStudyPlansRepository
+  implements DailyStudyPlansRepository
+{
+  createDailyStudyPlan = async (
+    payload: Prisma.DailyStudyPlanUncheckedCreateInput
+  ) => {
     const dailyStudyPlan = await prisma.dailyStudyPlan.create({
       data: payload
     })

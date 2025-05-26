@@ -9,7 +9,7 @@ export class AddPlanToFavouritesController extends BaseController {
   constructor() {
     super({
       method: 'post',
-      path: '/favourites/add'
+      path: '/favourites'
     })
   }
 

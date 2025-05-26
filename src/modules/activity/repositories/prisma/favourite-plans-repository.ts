@@ -1,9 +1,13 @@
-import { Prisma, FavouritePlan, WeeklyStudyPlan } from "@prisma/client";
-import { FavouritePlansRepository } from "../interfaces/favourite-plans-repository";
-import { prisma } from "@/shared/infra/database/prisma/client";
+import { Prisma, FavouritePlan, WeeklyStudyPlan } from '@prisma/client'
+import { FavouritePlansRepository } from '../interfaces/favourite-plans-repository'
+import { prisma } from '@/shared/infra/database/prisma/client'
 
-export class PrismaFavouritePlansRepository implements FavouritePlansRepository {
-  addPlanToFavourites = async (payload: Prisma.FavouritePlanUncheckedCreateInput) => {
+export class PrismaFavouritePlansRepository
+  implements FavouritePlansRepository
+{
+  addPlanToFavourites = async (
+    payload: Prisma.FavouritePlanUncheckedCreateInput
+  ) => {
     const favouritePlan = await prisma.favouritePlan.create({
       data: payload
     })
@@ -15,6 +19,9 @@ export class PrismaFavouritePlansRepository implements FavouritePlansRepository 
     const favouritePlans = await prisma.favouritePlan.findMany({
       where: {
         userId
+      },
+      include: {
+        weeklyStudyPlans: true
       }
     })
 
